@@ -119,6 +119,7 @@ def create_doc(date_one, date_two, employer_name):
 
 
 if __name__ == '__main__':
-    # app = create_doc("10.06.20", "15.06.20", "Уважаемый К.О.")
-    # print(app)
-    print("I work")
+    app = create_doc("10.06.20", "15.06.20", "Уважаемый К.О.")
+    print(app)
+
+
