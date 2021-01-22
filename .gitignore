@@ -1,0 +1,11 @@
+*.pyc
+*~
+__pycache__
+venv
+.idea
+commands.txt
+/credentials/.env
+/credentials/database.db
+/credentials/credentials.json
+database
+tests
