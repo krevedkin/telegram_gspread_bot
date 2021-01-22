@@ -173,3 +173,9 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(merge_request)
         self.spreadsheet_to.batch_update(unmerge_request)
+
+if __name__ == '__main__':
+
+    pass
+
+
