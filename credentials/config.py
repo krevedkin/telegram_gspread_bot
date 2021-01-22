@@ -16,9 +16,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
 
-settings = Settings(_env_file=".env")
+settings = Settings(_env_file="../credentials/.env")
 
-if __name__ == '__main__':
-    settings = Settings(_env_file=".env")
-    print(settings.TOKEN)
-    print(settings.dict())
+
+
