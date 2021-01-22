@@ -19,4 +19,4 @@ class Settings(BaseSettings):
 settings = Settings(_env_file="../credentials/.env")
 
 
-print("test")
+
