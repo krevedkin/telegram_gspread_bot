@@ -42,10 +42,10 @@ class DataCollections:
         result_second_string = f"{day_second} {months[month_second]} {year_second}"
         return result_first_string, result_second_string
 
-    def generate_row_indexes_collection(self, insert_list: list[list]) -> list:
+    def generate_row_indexes_collection(self, insert_list: list[list], word: str = None) -> list:
         """Generates collections of row indexes startswith specific word"""
         for row_index, single_list in enumerate(insert_list):
-            if single_list[0] == "Дата":
+            if single_list[0] == word:
                 yield row_index + 1
             else:
                 row_index += 1
@@ -128,18 +128,14 @@ class DataCollections:
                 min = mid + 1
         return None
 
-    @staticmethod
-    def get_array_names(worksheets_names, array):
-        """Gets list of strings from gspread_worksheets method
+    def generate_array_names(self, worksheets_names, array):
+        """Generates list of strings from gspread_worksheets method
          and saves their names in the list if name exists in array"""
-        result_worksheet_names = []
-        array_checker = array
         for item in worksheets_names:
             item = str(item)
             item = item.split("'")
-            if item[1] in array_checker:
-                result_worksheet_names.append(item[1])
-        return result_worksheet_names
+            if item[1] in array:
+                yield item[1]
 
     def string_finder(self, string: str, start_find: str, second_find: str, step: int = 0) -> str:
         """Searching for specific value in the string"""
