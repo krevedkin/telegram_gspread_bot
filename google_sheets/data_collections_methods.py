@@ -42,15 +42,13 @@ class DataCollections:
         result_second_string = f"{day_second} {months[month_second]} {year_second}"
         return result_first_string, result_second_string
 
-    def return_row_index(self, insert_list: list[list]) -> list:
-        """Returns a list of indices for strings that start with a specific word"""
-        row_index_list = []
+    def generate_row_indexes_collection(self, insert_list: list[list]) -> list:
+        """Generates collections of row indexes startswith specific word"""
         for row_index, single_list in enumerate(insert_list):
             if single_list[0] == "Дата":
-                row_index_list.append(row_index + 1)
+                yield row_index + 1
             else:
                 row_index += 1
-        return row_index_list
 
     def create_sorted_list_of_lists(self, list_of_lists: list[list],
                                     sorting_queue: tuple[int] or list[int],
