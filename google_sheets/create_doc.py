@@ -6,7 +6,7 @@ from credentials.config import settings
 URL_from = settings.URL_20
 URL_to = settings.URL_to
 sheet_name = "Лист1"
-sheet_id = 0
+sheet_id = 739422900
 
 
 def create_doc(date_one, date_two, employer_name):
@@ -87,7 +87,7 @@ def create_doc(date_one, date_two, employer_name):
     first_range = 11
     last_range = len(all_doc_values) + 10
     result_range = f"A{first_range}:F{last_range}"
-    document.update(result_range, all_doc_values)
+    document.update(range=result_range, values=all_doc_values)
 
     # add borders of the cells
     document.add_borders(result_range)
@@ -105,7 +105,7 @@ def create_doc(date_one, date_two, employer_name):
         ["", "", "", "Начальник конструкторского отдела", constructor_name],
         ["", "", "", "Сотрудник", employer_name],
     ]
-    document.update(down_head_range, down_head)
+    document.update(range=down_head_range, values=down_head)
 
     # create top head article, employer name and doc's title name
     head_dates = data_collection.create_head_dates(date_one, date_two)
@@ -121,5 +121,3 @@ def create_doc(date_one, date_two, employer_name):
 if __name__ == '__main__':
     app = create_doc("10.06.20", "15.06.20", "Уважаемый К.О.")
     print(app)
-
-

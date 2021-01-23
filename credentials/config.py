@@ -16,6 +16,6 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
 
-settings = Settings(_env_file="../credentials/.env")
 
+settings = Settings(_env_file="../credentials/.env")
 

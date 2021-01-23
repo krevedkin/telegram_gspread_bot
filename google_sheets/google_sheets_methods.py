@@ -107,8 +107,6 @@ class GoogleSheets:
 
     def delete_borders(self, range: str) -> None:
         """Removes borders of the cells by JSON format"""
-        print(self.spreadsheet_to)
-        print(self.sheet_name_to)
         self.spreadsheet_to.worksheet(self.sheet_name_to).format(
             range,
             {
@@ -173,3 +171,4 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(merge_request)
         self.spreadsheet_to.batch_update(unmerge_request)
+

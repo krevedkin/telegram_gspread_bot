@@ -5,14 +5,6 @@ import datetime
 class DataCollections:
     """Class for work with lists, lists of lists and other collections of data"""
 
-    @staticmethod
-    def list_sort(list_for_sorting: list, sorting_queue: tuple[int] or list[int]) -> list:
-        """Gets single list,and list of indexes and return new list with elements saved and ordered by sorting_queue"""
-        result_list = []
-        for index in sorting_queue:
-            result_list.append(list_for_sorting[index])
-        return result_list
-
     def create_head_dates(self, first_date: str = "10.05.20", second_date: str = "15.05.20") -> tuple:
         """Creates two strings like '10 may 2020' from '10.05.2020"""
         months = {
@@ -75,9 +67,9 @@ class DataCollections:
                 result_list.append(
                     ["Дата", stupid_free_spaces, stupid_free_spaces, single_list[0]]
                 )
-                result_list.append(self.list_sort(single_list, sorting_queue))
+                result_list.append([single_list[i] for i in sorting_queue])
             else:
-                result_list.append(self.list_sort(single_list, sorting_queue))
+                result_list.append([single_list[i] for i in sorting_queue])
         return result_list
 
     def date(self, item: str) -> object or None:
