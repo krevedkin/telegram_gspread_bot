@@ -38,11 +38,11 @@ def create_doc(date_one, date_two, employer_name):
         "Ноябрь",
         "Декабрь",
     )
-    months = document.get_all_sheets_names(month_array_checker)
-    months.reverse()
+    #months = document.get_all_sheets_names(month_array_checker)
+    #months.reverse()
 
     # Get all values from doc
-    all_doc_values = document.get_all_doc_values(months)
+    all_doc_values = document.get_all_doc_values(month_array_checker)
 
     # Get first and second dates for searching
     first_date = data_collection.first_date_search(all_doc_values, date_one)
@@ -60,7 +60,7 @@ def create_doc(date_one, date_two, employer_name):
     all_doc_values = data_collection.create_sorted_list_of_lists(all_doc_values, sorting_queue)
 
     # get strings indexes for future cells merge
-    rows_list = data_collection.return_row_index(all_doc_values)
+    # rows_list = data_collection.return_row_index_gen(all_doc_values)
 
     # create and update doc merge_cells requests
     requests_first_merge = document.make_a_request_body(
@@ -69,7 +69,7 @@ def create_doc(date_one, date_two, employer_name):
         start_column_index=0,
         end_column_index=3,
         sheet_id=sheet_id,
-        row_index_list=rows_list
+        row_index_list=data_collection.generate_row_indexes_collection(all_doc_values, word="Дата")
     )
     requests_second_merge = document.make_a_request_body(
         start_row_index=9,
@@ -77,7 +77,7 @@ def create_doc(date_one, date_two, employer_name):
         start_column_index=3,
         end_column_index=6,
         sheet_id=sheet_id,
-        row_index_list=rows_list
+        row_index_list=data_collection.generate_row_indexes_collection(all_doc_values, word="Дата")
     )
 
     document.batch_update({"requests": requests_first_merge})
@@ -119,5 +119,5 @@ def create_doc(date_one, date_two, employer_name):
 
 
 if __name__ == '__main__':
-    app = create_doc("10.06.20", "15.06.20", "Уважаемый К.О.")
+    app = create_doc("10.08.20", "15.08.20", "Уважаемый К.О.")
     print(app)
