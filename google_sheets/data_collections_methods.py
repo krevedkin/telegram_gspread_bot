@@ -128,9 +128,11 @@ class DataCollections:
                 min = mid + 1
         return None
 
-    def generate_array_names(self, worksheets_names, array):
+    @staticmethod
+    def get_array_names(worksheets_names, array):
         """Generates list of strings from gspread_worksheets method
          and saves their names in the list if name exists in array"""
+        array_names = [name for name in worksheets_names]
         for item in worksheets_names:
             item = str(item)
             item = item.split("'")
