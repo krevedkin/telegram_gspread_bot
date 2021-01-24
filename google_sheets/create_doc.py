@@ -1,7 +1,7 @@
 # script version 1.1
 import google_sheets_methods
 import data_collections_methods
-from credentials.config import settings
+from config import settings
 
 URL_from = settings.URL_20
 URL_to = settings.URL_to
