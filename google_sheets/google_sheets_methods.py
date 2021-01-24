@@ -120,10 +120,10 @@ class GoogleSheets:
         )
 
     def get_all_sheets_names(self, sheets_names):
-        """This method returns worksheets names of doc if they are in array"""
+        """This method returns worksheets names of doc"""
         worksheet_names = self.spreadsheet_from.worksheets()
 
-        return data_collections_methods.DataCollections.get_array_names(worksheet_names, sheets_names)
+        return worksheet_names
 
     def get_all_doc_values(self, worksheets_names: tuple or list, start_row: int = 2) -> list[list]:
         """Gets worksheet names and save all values from them to list"""
