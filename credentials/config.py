@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     URL_20: str
     URL_to: str
     GUARANTEE_URL: str
+    WEBHOOK_URL:str
     USER_1: str
     USER_2: str
     USER_3: str
