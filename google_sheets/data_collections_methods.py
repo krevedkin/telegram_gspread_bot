@@ -129,15 +129,14 @@ class DataCollections:
         return None
 
     @staticmethod
-    def get_array_names(worksheets_names, array):
+    def get_array_names(worksheets_names):
         """Generates list of strings from gspread_worksheets method
          and saves their names in the list if name exists in array"""
-        array_names = [name for name in worksheets_names]
+
         for item in worksheets_names:
             item = str(item)
             item = item.split("'")
-            if item[1] in array:
-                yield item[1]
+            yield item[1]
 
     def string_finder(self, string: str, start_find: str, second_find: str, step: int = 0) -> str:
         """Searching for specific value in the string"""
