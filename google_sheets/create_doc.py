@@ -45,9 +45,6 @@ def create_doc(date_one, date_two, employer_name):
     sorting_queue = (4, 1, 2, 5, 6, 8)
     all_doc_values = data_collection.create_sorted_list_of_lists(all_doc_values, sorting_queue)
 
-    # get strings indexes for future cells merge
-    # rows_list = data_collection.return_row_index_gen(all_doc_values)
-
     # create and update doc merge_cells requests
     requests_first_merge = document.make_a_request_body(
         start_row_index=9,
@@ -107,4 +104,3 @@ def create_doc(date_one, date_two, employer_name):
 if __name__ == '__main__':
     app = create_doc("10.01.20", "15.01.20", "Уважаемый К.О.")
     print(app)
-
