@@ -1,6 +1,6 @@
 """script version 1.1"""
 import gspread
-from google_sheets import data_collections_methods
+from google_sheets.data_collections_methods import DataCollections
 
 
 class GoogleSheets:
@@ -119,11 +119,15 @@ class GoogleSheets:
             },
         )
 
-    def get_all_sheets_names(self, sheets_names):
+    def get_all_sheets_names(self, reverse=False):
         """This method returns worksheets names of doc"""
+        result = []
         worksheet_names = self.spreadsheet_from.worksheets()
-
-        return worksheet_names
+        for item in DataCollections.get_array_names(worksheet_names):
+            result.append(item)
+        if reverse is True:
+            result.reverse()
+        return result
 
     def get_all_doc_values(self, worksheets_names: tuple or list, start_row: int = 2) -> list[list]:
         """Gets worksheet names and save all values from them to list"""
@@ -171,4 +175,3 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(merge_request)
         self.spreadsheet_to.batch_update(unmerge_request)
-
