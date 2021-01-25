@@ -1,6 +1,6 @@
 """script version 1.1"""
 import gspread
-import data_collections_methods
+from google_sheets import data_collections_methods
 
 
 class GoogleSheets:

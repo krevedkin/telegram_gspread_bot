@@ -1,10 +1,10 @@
 # script version 1.1
-import google_sheets_methods
-import data_collections_methods
-from credentials.config import settings
+from google_sheets import google_sheets_methods
+from google_sheets import data_collections_methods
+from credentials.config import URL_21,URL_TO
 
-URL_from = settings.URL_20
-URL_to = settings.URL_to
+URL_from = URL_21
+URL_to = URL_TO
 sheet_name = "Лист1"
 sheet_id = 739422900
 
@@ -119,5 +119,6 @@ def create_doc(date_one, date_two, employer_name):
 
 
 if __name__ == '__main__':
-    app = create_doc("10.08.20", "15.08.20", "Уважаемый К.О.")
-    print(app)
+    #app = create_doc("10.08.20", "15.08.20", "Уважаемый К.О.")
+    #print(app)
+    print(URL_21)
