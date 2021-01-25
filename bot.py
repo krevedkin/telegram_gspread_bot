@@ -136,7 +136,6 @@ def make_decision(call):
             bot.send_message(
                 call.message.chat.id, text=str(e)
             )
-
             bot.send_message(
                 call.message.chat.id, text="Что-то пошло не так пишите креведкину"
             )

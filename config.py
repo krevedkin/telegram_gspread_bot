@@ -22,6 +22,4 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = path_to_env
-
-
 settings = Settings()
