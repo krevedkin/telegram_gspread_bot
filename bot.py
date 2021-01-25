@@ -1,7 +1,7 @@
-# script version 1.1
+# script version 1.2
 import telebot
-from google_sheets.create_doc import create_doc
 from config import settings
+from google_sheets.create_doc import create_doc
 from flask import Flask, request
 
 dates_and_employer_name = []
@@ -10,14 +10,13 @@ white_list = [
     settings.USER_2,
     settings.USER_3,
     settings.USER_4,
-    settings.USER_5,
+    settings.USER_5
 ]
 
 bot = telebot.TeleBot(settings.TOKEN, threaded=False)
 webhook_url = settings.WEBHOOK_URL
 bot.remove_webhook()
 bot.set_webhook(webhook_url)
-
 app = Flask(__name__)
 
 
@@ -133,7 +132,10 @@ def make_decision(call):
                 )
                 bot.send_message(call.message.chat.id, text=result)
                 new_start_message(call.message.chat.id)
-        except:
+        except Exception as e:
+            bot.send_message(
+                call.message.chat.id, text=str(e)
+            )
             bot.send_message(
                 call.message.chat.id, text="Что-то пошло не так пишите креведкину"
             )

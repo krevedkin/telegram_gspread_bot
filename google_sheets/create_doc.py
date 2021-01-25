@@ -1,6 +1,6 @@
-# script version 1.1
-import google_sheets_methods
-import data_collections_methods
+# script version 1.2
+from google_sheets import google_sheets_methods
+from google_sheets import data_collections_methods
 from config import settings
 
 URL_from = settings.URL_21
@@ -24,22 +24,8 @@ def create_doc(date_one, date_two, employer_name):
     document.delete_borders(range="A11:F1000")
 
     # Get all worksheets names from doc
-    month_array_checker = (
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь",
-    )
-    months = document.get_all_sheets_names(month_array_checker)
-    months.reverse()
+    months = document.get_all_sheets_names(reverse=True)
+    months = months[1:]  # remove unnecessary worksheet name
 
     # Get all values from doc
     all_doc_values = document.get_all_doc_values(months)
@@ -59,9 +45,6 @@ def create_doc(date_one, date_two, employer_name):
     sorting_queue = (4, 1, 2, 5, 6, 8)
     all_doc_values = data_collection.create_sorted_list_of_lists(all_doc_values, sorting_queue)
 
-    # get strings indexes for future cells merge
-    rows_list = data_collection.return_row_index(all_doc_values)
-
     # create and update doc merge_cells requests
     requests_first_merge = document.make_a_request_body(
         start_row_index=9,
@@ -69,7 +52,7 @@ def create_doc(date_one, date_two, employer_name):
         start_column_index=0,
         end_column_index=3,
         sheet_id=sheet_id,
-        row_index_list=rows_list
+        row_index_list=data_collection.generate_row_indexes_collection(all_doc_values, word="Дата")
     )
     requests_second_merge = document.make_a_request_body(
         start_row_index=9,
@@ -77,7 +60,7 @@ def create_doc(date_one, date_two, employer_name):
         start_column_index=3,
         end_column_index=6,
         sheet_id=sheet_id,
-        row_index_list=rows_list
+        row_index_list=data_collection.generate_row_indexes_collection(all_doc_values, word="Дата")
     )
 
     document.batch_update({"requests": requests_first_merge})
@@ -119,5 +102,5 @@ def create_doc(date_one, date_two, employer_name):
 
 
 if __name__ == '__main__':
-    app = create_doc("07.01.21", "10.01.21", "Уважаемый К.О.")
+    app = create_doc("10.01.21", "15.01.21", "Уважаемый К.О.")
     print(app)

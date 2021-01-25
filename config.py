@@ -1,4 +1,10 @@
+#script version 1.2
 from pydantic import BaseSettings
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+path_to_env = os.path.join(basedir, "credentials/.env")
+path_to_creds = os.path.join(basedir, "credentials/credentials.json")
 
 
 class Settings(BaseSettings):
@@ -15,7 +21,5 @@ class Settings(BaseSettings):
     USER_5: str
 
     class Config:
-        env_file = "credentials/.env"
-
-
-settings = Settings(_env_file="credentials/.env")
+        env_file = path_to_env
+settings = Settings()

@@ -1,6 +1,7 @@
-"""script version 1.1"""
+#script version 1.2
 import gspread
-import data_collections_methods
+from google_sheets.data_collections_methods import DataCollections
+from config import path_to_creds
 
 
 class GoogleSheets:
@@ -13,12 +14,12 @@ class GoogleSheets:
         """Authentication in google"""
         self.spreadsheet_url_from = spreadsheet_url_from
         self.spreadsheet_url_to = spreadsheet_url_to
-        self.client = gspread.service_account(filename="../credentials/credentials.json")
+        self.client = gspread.service_account(filename=path_to_creds)
         self.sheet_name_to = sheet_name_to
         self.spreadsheet_from = self.client.open_by_url(self.spreadsheet_url_from)
         self.spreadsheet_to = self.client.open_by_url(self.spreadsheet_url_to)
 
-    def update(self, range, values) -> None:
+    def update(self, range: str, values: str) -> None:
         """Method for update spreadsheet objects"""
         self.spreadsheet_to.worksheet(self.sheet_name_to).update(range, values)
 
@@ -43,7 +44,7 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(request)
 
-    def get_url(self):
+    def get_url(self) -> str:
         """Return spreadsheet URL"""
         return self.spreadsheet_to.url
 
@@ -75,7 +76,7 @@ class GoogleSheets:
             end_column_index: int,
             sheet_id: int,
             row_index_list: list,
-            merge_type: str = "MERGE_ROWS") -> list[dict]:
+            merge_type: str = "MERGE_ROWS") -> list:
         """Creates JSON request body for merge cells batch update """
         requests_list = []
         if merge_type == "MERGE_ROWS":
@@ -119,13 +120,17 @@ class GoogleSheets:
             },
         )
 
-    def get_all_sheets_names(self, sheets_names):
-        """This method returns worksheets names of doc if they are in array"""
+    def get_all_sheets_names(self, reverse=False):
+        """This method returns worksheets names of doc"""
+        result = []
         worksheet_names = self.spreadsheet_from.worksheets()
+        for item in DataCollections.get_array_names(worksheet_names):
+            result.append(item)
+        if reverse is True:
+            result.reverse()
+        return result
 
-        return data_collections_methods.DataCollections.get_array_names(worksheet_names, sheets_names)
-
-    def get_all_doc_values(self, worksheets_names: tuple or list, start_row: int = 2) -> list[list]:
+    def get_all_doc_values(self, worksheets_names: tuple or list, start_row: int = 2) -> list:
         """Gets worksheet names and save all values from them to list"""
         all_doc_values = []
         for item in worksheets_names:
@@ -171,4 +176,3 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(merge_request)
         self.spreadsheet_to.batch_update(unmerge_request)
-

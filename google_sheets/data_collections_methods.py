@@ -1,4 +1,4 @@
-# script version 1.1
+# script version 1.2
 import datetime
 
 
@@ -42,19 +42,17 @@ class DataCollections:
         result_second_string = f"{day_second} {months[month_second]} {year_second}"
         return result_first_string, result_second_string
 
-    def return_row_index(self, insert_list: list[list]) -> list:
-        """Returns a list of indices for strings that start with a specific word"""
-        row_index_list = []
+    def generate_row_indexes_collection(self, insert_list: list, word: str = None) -> list:
+        """Generates collections of row indexes startswith specific word"""
         for row_index, single_list in enumerate(insert_list):
-            if single_list[0] == "Дата":
-                row_index_list.append(row_index + 1)
+            if single_list[0] == word:
+                yield row_index + 1
             else:
                 row_index += 1
-        return row_index_list
 
-    def create_sorted_list_of_lists(self, list_of_lists: list[list],
-                                    sorting_queue: tuple[int] or list[int],
-                                    flag=True) -> list[list]:
+    def create_sorted_list_of_lists(self, list_of_lists: list,
+                                    sorting_queue: tuple or list,
+                                    flag=True) -> list:
         """Gets list of lists with all values, and list of indices which should be saved by order of sorting_queue"""
         result_list = []
         first_index_of_list = ""
@@ -84,7 +82,7 @@ class DataCollections:
         except:
             return None
 
-    def first_date_search(self, list_for_search: list[list], item: str) -> int or None:
+    def first_date_search(self, list_for_search: list, item: str) -> int or None:
         """Searching for the first value in the list. It uses binary search algorithm"""
         min = 0
         max = len(list_for_search) - 1
@@ -107,7 +105,7 @@ class DataCollections:
                 min = mid + 1
         return None
 
-    def last_date_search(self, list_for_search: list[list], item: str) -> int or None:
+    def last_date_search(self, list_for_search: list, item: str) -> int or None:
         """Searching for the last value in the list. It uses binary search algorithm"""
         min = 0
         max = len(list_for_search) - 1
@@ -131,17 +129,14 @@ class DataCollections:
         return None
 
     @staticmethod
-    def get_array_names(worksheets_names, array):
-        """Gets list of strings from gspread_worksheets method
+    def get_array_names(worksheets_names):
+        """Generates list of strings from gspread_worksheets method
          and saves their names in the list if name exists in array"""
-        result_worksheet_names = []
-        array_checker = array
+
         for item in worksheets_names:
             item = str(item)
             item = item.split("'")
-            if item[1] in array_checker:
-                result_worksheet_names.append(item[1])
-        return result_worksheet_names
+            yield item[1]
 
     def string_finder(self, string: str, start_find: str, second_find: str, step: int = 0) -> str:
         """Searching for specific value in the string"""
@@ -150,7 +145,7 @@ class DataCollections:
         result = string[first_index + 1:second_index - step]
         return result
 
-    def quick_sort(self, list_of_lists: list[list]) -> list[list]:
+    def quick_sort(self, list_of_lists: list) -> list:
         """QuickSort algorithm for sorting list of lists in ascending order"""
         if len(list_of_lists) <= 1:
             return list_of_lists
@@ -184,7 +179,7 @@ class DataCollections:
                     center.append(single_list)
             return self.quick_sort(left) + center + self.quick_sort(right)
 
-    def insert_data_to_list(self, list_of_lists: list[list], index: int) -> None:
+    def insert_data_to_list(self, list_of_lists: list, index: int) -> None:
         """Method for insert value to the single list in list of lists"""
         for single_list in list_of_lists:
             data = self.string_finder(single_list[0], "(", ")")
