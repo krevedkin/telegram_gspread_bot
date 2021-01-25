@@ -19,9 +19,9 @@ WHITE_LIST = [
 
 TOKEN = os.getenv("TOKEN")
 URL_21 = os.getenv("URL_21")
-URL_20 = os.getenv("URL_21")
+URL_20 = os.getenv("URL_20")
 URL_TO = os.getenv("URL_to")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 if __name__ == '__main__':
-    print(URL_TO)
+    print(URL_20)
