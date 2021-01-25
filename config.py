@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 # telegram part
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, "credentials/.env"))
+path_to_creds = os.path.join(basedir, "credentials/credentials.json")
+
 
 # this is list of users which have permissions for using this app
 WHITE_LIST = [
@@ -24,4 +26,5 @@ URL_TO = os.getenv("URL_to")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 if __name__ == '__main__':
-    print(URL_20)
+
+    print(path_to_creds)
