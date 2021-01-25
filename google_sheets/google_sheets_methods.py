@@ -1,4 +1,4 @@
-"""script version 1.1"""
+#script version 1.2
 import gspread
 from google_sheets.data_collections_methods import DataCollections
 from config import path_to_creds

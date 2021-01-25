@@ -1,19 +1,22 @@
-# script version 1.1
+# script version 1.2
 import telebot
 from config import settings
 from google_sheets.create_doc import create_doc
-
 from flask import Flask, request
-#settings = Settings(_env_file="./credentials/.env")
+
 dates_and_employer_name = []
-white_list = [settings.USER_1,settings.USER_2]
+white_list = [
+    settings.USER_1,
+    settings.USER_2,
+    settings.USER_3,
+    settings.USER_4,
+    settings.USER_5
+]
 
 bot = telebot.TeleBot(settings.TOKEN, threaded=False)
 webhook_url = settings.WEBHOOK_URL
-"""
 bot.remove_webhook()
 bot.set_webhook(webhook_url)
-
 app = Flask(__name__)
 
 
@@ -21,7 +24,7 @@ app = Flask(__name__)
 def webhook():
     update = telebot.types.Update.de_json(request.stream.read().decode('utf-8'))
     bot.process_new_updates([update])
-    return 'ok', 200"""
+    return 'ok', 200
 
 
 def new_start_message(message_chat_id):
@@ -158,5 +161,3 @@ def help(message):
         "нажмите кнопку 'сделать отчет', после чего бот пришлет ссылку на готовый документ."
         "Пройдите по ней, и нажмите 'скачать как документ Excel'",
     )
-
-

@@ -1,4 +1,4 @@
-# script version 1.1
+# script version 1.2
 from google_sheets import google_sheets_methods
 from google_sheets import data_collections_methods
 from config import settings

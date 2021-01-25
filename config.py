@@ -1,3 +1,4 @@
+#script version 1.2
 from pydantic import BaseSettings
 import os
 

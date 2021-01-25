@@ -1,4 +1,4 @@
-# script version 1.1
+# script version 1.2
 import datetime
 
 
