@@ -3,6 +3,7 @@ import gspread
 from google_sheets.data_collections_methods import DataCollections
 from config import path_to_creds
 
+
 class GoogleSheets:
     """Class for work with Google Spreadsheets API"""
 
@@ -18,7 +19,7 @@ class GoogleSheets:
         self.spreadsheet_from = self.client.open_by_url(self.spreadsheet_url_from)
         self.spreadsheet_to = self.client.open_by_url(self.spreadsheet_url_to)
 
-    def update(self, range, values) -> None:
+    def update(self, range: str, values: str) -> None:
         """Method for update spreadsheet objects"""
         self.spreadsheet_to.worksheet(self.sheet_name_to).update(range, values)
 
@@ -43,7 +44,7 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(request)
 
-    def get_url(self):
+    def get_url(self) -> str:
         """Return spreadsheet URL"""
         return self.spreadsheet_to.url
 
@@ -75,7 +76,7 @@ class GoogleSheets:
             end_column_index: int,
             sheet_id: int,
             row_index_list: list,
-            merge_type: str = "MERGE_ROWS") -> list[dict]:
+            merge_type: str = "MERGE_ROWS") -> list:
         """Creates JSON request body for merge cells batch update """
         requests_list = []
         if merge_type == "MERGE_ROWS":
@@ -129,7 +130,7 @@ class GoogleSheets:
             result.reverse()
         return result
 
-    def get_all_doc_values(self, worksheets_names: tuple or list, start_row: int = 2) -> list[list]:
+    def get_all_doc_values(self, worksheets_names: tuple or list, start_row: int = 2) -> list:
         """Gets worksheet names and save all values from them to list"""
         all_doc_values = []
         for item in worksheets_names:
