@@ -1,15 +1,15 @@
 # script version 1.1
 import telebot
-from credentials.config import TOKEN,WHITE_LIST,WEBHOOK_URL
+from config import settings
 from google_sheets.create_doc import create_doc
 
 from flask import Flask, request
 #settings = Settings(_env_file="./credentials/.env")
 dates_and_employer_name = []
-white_list = WHITE_LIST
+white_list = [settings.USER_1,settings.USER_2]
 
-bot = telebot.TeleBot(TOKEN, threaded=False)
-webhook_url = WEBHOOK_URL
+bot = telebot.TeleBot(settings.TOKEN, threaded=False)
+webhook_url = settings.WEBHOOK_URL
 """
 bot.remove_webhook()
 bot.set_webhook(webhook_url)
@@ -159,5 +159,4 @@ def help(message):
         "Пройдите по ней, и нажмите 'скачать как документ Excel'",
     )
 
-if __name__ == '__main__':
-    print(TOKEN)
+

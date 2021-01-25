@@ -1,10 +1,10 @@
 # script version 1.1
 from google_sheets import google_sheets_methods
 from google_sheets import data_collections_methods
-from credentials.config import URL_21,URL_TO
+from config import settings
 
-URL_from = URL_21
-URL_to = URL_TO
+URL_from = settings.URL_20
+URL_to = settings.URL_to
 sheet_name = "Лист1"
 sheet_id = 739422900
 
@@ -24,25 +24,11 @@ def create_doc(date_one, date_two, employer_name):
     document.delete_borders(range="A11:F1000")
 
     # Get all worksheets names from doc
-    month_array_checker = (
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь",
-    )
-    #months = document.get_all_sheets_names(month_array_checker)
-    #months.reverse()
+    months = document.get_all_sheets_names(reverse=True)
+    months = months[1:]  # remove unnecessary worksheet name
 
     # Get all values from doc
-    all_doc_values = document.get_all_doc_values(month_array_checker)
+    all_doc_values = document.get_all_doc_values(months)
 
     # Get first and second dates for searching
     first_date = data_collection.first_date_search(all_doc_values, date_one)
@@ -119,6 +105,6 @@ def create_doc(date_one, date_two, employer_name):
 
 
 if __name__ == '__main__':
-    #app = create_doc("10.08.20", "15.08.20", "Уважаемый К.О.")
-    #print(app)
-    print(URL_21)
+    app = create_doc("10.01.20", "15.01.20", "Уважаемый К.О.")
+    print(app)
+

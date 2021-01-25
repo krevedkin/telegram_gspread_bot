@@ -1,7 +1,7 @@
 """script version 1.1"""
 import gspread
 from google_sheets.data_collections_methods import DataCollections
-
+from config import path_to_creds
 
 class GoogleSheets:
     """Class for work with Google Spreadsheets API"""
@@ -13,7 +13,7 @@ class GoogleSheets:
         """Authentication in google"""
         self.spreadsheet_url_from = spreadsheet_url_from
         self.spreadsheet_url_to = spreadsheet_url_to
-        self.client = gspread.service_account(filename="../credentials/credentials.json")
+        self.client = gspread.service_account(filename=path_to_creds)
         self.sheet_name_to = sheet_name_to
         self.spreadsheet_from = self.client.open_by_url(self.spreadsheet_url_from)
         self.spreadsheet_to = self.client.open_by_url(self.spreadsheet_url_to)
