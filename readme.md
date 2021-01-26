@@ -25,7 +25,7 @@ kept in environment variables or .env file.
 #How it works
 
 The main file is bot.py. This script activates bot and it's waiting for user requests.
-After /start command user have to take two dates and his name to bot and push the button for get result.
+After /start command user have to send two dates and his name to bot and push the button for get result.ыуыу
 
 Script create_doc.py gets these arguments from bot.py and creates a finished document,
 after that it returns URL to user in Telegram with a finished doc.
