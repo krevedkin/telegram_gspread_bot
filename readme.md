@@ -1,6 +1,6 @@
 # telegram_gspread_bot
 
-![Alt text](img) / ![](demo.gif)
+![Alt text](img/demo.gif) / ![](img/demo.gif)
 
 #About
 
