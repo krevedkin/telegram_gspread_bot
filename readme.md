@@ -23,10 +23,12 @@ https://core.telegram.org/bots/faq#how-do-i-create-a-bot
 A file config.py uses **Pydantic Settings** for work with spreadsheets URLs, telegram Token and nicknames of users which have access to bot. All this data is
 kept in environment variables or .env file. 
 
+It uses webhooks for handle users requests so I used **Flask** for handle POST requests.
+
 #How it works
 
 The main file is bot.py. This script activates bot and it's waiting for user requests.
-After /start command user have to send two dates and his name to bot and push the button for get result.ыуыу
+After /start command user have to send two dates and his name to bot and push the button for get result.
 
 Script create_doc.py gets these arguments from bot.py and creates a finished document,
 after that it returns URL to user in Telegram with a finished doc.
