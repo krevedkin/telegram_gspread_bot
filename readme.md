@@ -5,8 +5,9 @@
 #About
 
 Telegram bot for work with google spreadsheets. This telegram bot works with **telebot** and **gspread** packages.  
-Developed by using **Python3.9** (but also works with **Python 3.8** version)
-for using this app  you have to install requirements from requirements.txt
+Developed by using **Python3.9** (but also works with **Python 3.8** version).
+You have to install requirements from requirements.txt for using this app 
+ 
 
 `pip install -r requirements.txt`
 
