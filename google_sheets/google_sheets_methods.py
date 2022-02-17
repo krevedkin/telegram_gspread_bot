@@ -1,4 +1,4 @@
-#script version 1.2
+# script version 1.3
 import gspread
 from google_sheets.data_collections_methods import DataCollections
 from config import path_to_creds
@@ -19,7 +19,7 @@ class GoogleSheets:
         self.spreadsheet_from = self.client.open_by_url(self.spreadsheet_url_from)
         self.spreadsheet_to = self.client.open_by_url(self.spreadsheet_url_to)
 
-    def update(self, range: str, values: str) -> None:
+    def update(self, range: str, values: str or list) -> None:
         """Method for update spreadsheet objects"""
         self.spreadsheet_to.worksheet(self.sheet_name_to).update(range, values)
 
@@ -122,10 +122,27 @@ class GoogleSheets:
 
     def get_all_sheets_names(self, reverse=False):
         """This method returns worksheets names of doc"""
+        months = {
+            'январь': 1,
+            'февраль': 2,
+            'март': 3,
+            'апрель': 4,
+            'май': 5,
+            'июнь': 6,
+            'июль': 7,
+            'август': 8,
+            'сентябрь': 9,
+            'октябрь': 10,
+            'ноябрь': 11,
+            'декабрь': 12,
+
+        }
         result = []
         worksheet_names = self.spreadsheet_from.worksheets()
-        for item in DataCollections.get_array_names(worksheet_names):
-            result.append(item)
+        for month in DataCollections.get_array_names(worksheet_names):
+            if month.lower() in months:
+                result.append(month)
+        result.sort(key=lambda month_name: months[month_name.lower()])
         if reverse is True:
             result.reverse()
         return result
