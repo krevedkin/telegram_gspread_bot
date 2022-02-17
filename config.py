@@ -24,6 +24,8 @@ class Settings(BaseSettings):
     USER_6: str
     USER_7: str
     USER_8: str
+    USER_9: str
+    USER_10: str
 
     class Config:
         env_file = path_to_env
