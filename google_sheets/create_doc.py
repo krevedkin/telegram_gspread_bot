@@ -1,9 +1,9 @@
-# script version 1.2
+# script version 1.3
 from google_sheets import google_sheets_methods
 from google_sheets import data_collections_methods
 from config import settings
 
-URL_from = settings.URL_21
+URL_from = settings.URL_22
 URL_to = settings.URL_to
 sheet_name = "Лист1"
 sheet_id = 739422900
@@ -24,8 +24,7 @@ def create_doc(date_one, date_two, employer_name):
     document.delete_borders(range="A11:F1000")
 
     # Get all worksheets names from doc
-    months = document.get_all_sheets_names(reverse=True)
-    months = months[1:]  # remove unnecessary worksheet name
+    months = document.get_all_sheets_names()
 
     # Get all values from doc
     all_doc_values = document.get_all_doc_values(months)
@@ -102,5 +101,5 @@ def create_doc(date_one, date_two, employer_name):
 
 
 if __name__ == '__main__':
-    app = create_doc("10.01.21", "15.01.21", "Уважаемый К.О.")
+    app = create_doc("18.01.22", "8.02.22", "Уважаемый К.О.")
     print(app)
