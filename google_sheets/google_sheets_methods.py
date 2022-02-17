@@ -1,4 +1,4 @@
-# script version 1.3
+# script version 1.4
 import gspread
 from google_sheets.data_collections_methods import DataCollections
 from config import path_to_creds
@@ -8,16 +8,17 @@ class GoogleSheets:
     """Class for work with Google Spreadsheets API"""
 
     def __init__(self, spreadsheet_url_from: str,
-                 spreadsheet_url_to: str,
-                 sheet_name_to: str,
+                 spreadsheet_url_to: str = None,
+                 sheet_name_to: str = None,
                  ) -> None:
         """Authentication in google"""
         self.spreadsheet_url_from = spreadsheet_url_from
-        self.spreadsheet_url_to = spreadsheet_url_to
         self.client = gspread.service_account(filename=path_to_creds)
-        self.sheet_name_to = sheet_name_to
         self.spreadsheet_from = self.client.open_by_url(self.spreadsheet_url_from)
-        self.spreadsheet_to = self.client.open_by_url(self.spreadsheet_url_to)
+        if spreadsheet_url_to and sheet_name_to is not None:
+            self.spreadsheet_url_to = spreadsheet_url_to
+            self.sheet_name_to = sheet_name_to
+            self.spreadsheet_to = self.client.open_by_url(self.spreadsheet_url_to)
 
     def update(self, range: str, values: str or list) -> None:
         """Method for update spreadsheet objects"""
@@ -193,3 +194,8 @@ class GoogleSheets:
 
         self.spreadsheet_to.batch_update(merge_request)
         self.spreadsheet_to.batch_update(unmerge_request)
+
+    def get_worksheet_by_name(self, worksheet_name: str):
+        """Return worksheet object by name"""
+        worksheet = self.spreadsheet_from.worksheet(worksheet_name)
+        return worksheet
