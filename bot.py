@@ -13,7 +13,9 @@ white_list = [
     settings.USER_5,
     settings.USER_6,
     settings.USER_7,
-    settings.USER_8
+    settings.USER_8,
+    settings.USER_9,
+    settings.USER_10
 ]
 
 bot = telebot.TeleBot(settings.TOKEN, threaded=False)
