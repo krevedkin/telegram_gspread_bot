@@ -1,4 +1,4 @@
-#script version 1.2
+# script version 1.3
 from pydantic import BaseSettings
 import os
 
@@ -9,6 +9,8 @@ path_to_creds = os.path.join(basedir, "credentials/credentials.json")
 
 class Settings(BaseSettings):
     TOKEN: str
+    URL_TEST: str
+    URL_22: str
     URL_21: str
     URL_20: str
     URL_to: str
@@ -25,4 +27,6 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = path_to_env
+
+
 settings = Settings()
