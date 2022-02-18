@@ -1,8 +1,8 @@
-# script version 1.0
+# script version 1.1
 from google_sheets import google_sheets_methods
 from config import settings
 
-URL_from = settings.URL_TEST
+URL_from = settings.URL_info
 
 
 def get_train_info(train_number):
