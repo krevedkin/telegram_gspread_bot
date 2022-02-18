@@ -1,4 +1,4 @@
-# script version 1.3
+# script version 1.4
 from pydantic import BaseSettings
 import os
 
@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     URL_21: str
     URL_20: str
     URL_to: str
+    URL_info: str
     GUARANTEE_URL: str
     WEBHOOK_URL: str
     USER_1: str
