@@ -1,4 +1,4 @@
-# script version 1.4
+# script version 1.5
 import gspread
 from google_sheets.data_collections_methods import DataCollections
 from config import path_to_creds
@@ -199,3 +199,6 @@ class GoogleSheets:
         """Return worksheet object by name"""
         worksheet = self.spreadsheet_from.worksheet(worksheet_name)
         return worksheet
+
+    def get_title_name(self):
+        return self.spreadsheet_from.title
