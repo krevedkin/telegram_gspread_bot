@@ -1,4 +1,4 @@
-# script version 1.1
+# script version 1.2
 from google_sheets import google_sheets_methods
 from config import settings
 
@@ -31,7 +31,11 @@ def get_train_info(train_number):
     for i, item in enumerate(head_values):
         result_dict[item] = searched_values[i]
 
-    result_string = f"Информация о составе {train_number}\n\n"
+    title_name = document.get_title_name()
+    result_string = f"Ссылка на оригинальную таблицу:\n" \
+                    f"<a href='{URL_from}'>{title_name}</a>\n\n" \
+                    f"<b>Информация о составе</b> <i>{train_number}</i>\n\n"
+
     for key in result_dict:
         result_string += f'<b>{key}</b> : <i>{result_dict[key]}</i>\n'
     return result_string
