@@ -61,7 +61,8 @@ def create_result(first_date, second_date, employer_name):
 @bot.message_handler(commands=["check"])
 def check_permission(message):
     """Check is there user in white list"""
-    if check_access(message.chat.username) or check_access(message.from_user.username):
+    if check_access(message.chat.username) or check_access(
+            message.from_user.username):
         bot.reply_to(message, "Вы в белом списке")
         new_start_message(message.chat.id)
     else:
@@ -78,10 +79,12 @@ def start(message):
 @bot.message_handler(commands=["create"])
 def create(message):
     """Command for start create_doc script"""
-    if check_access(message.chat.username) or check_access(message.from_user.username):
+    if check_access(message.chat.username) or check_access(
+            message.from_user.username):
         dates_and_employer_name.clear()
         msg = bot.reply_to(
-            message, "Введена команда /create. Введите первую дату например 01.01.21"
+            message,
+            "Введена команда /create. Введите первую дату например 01.01.21"
         )
         bot.register_next_step_handler(msg, get_a_first_date)
     else:
@@ -107,7 +110,8 @@ def get_a_second_date(message):
     if message.content_type == "text":
         dates_and_employer_name.append(message.text)
         bot.register_next_step_handler(message, get_a_employer_name)
-        bot.send_message(message.chat.id, text="Введите свою фамилию и инициалы")
+        bot.send_message(message.chat.id,
+                         text="Введите свою фамилию и инициалы")
 
 
 def get_a_employer_name(message):
@@ -138,7 +142,8 @@ def make_decision(call):
     if call.data == "create_result":
         bot.send_message(call.message.chat.id, text="Подождите, делаю отчет...")
         try:
-            result = create_result(dates_and_employer_name[0], dates_and_employer_name[1],
+            result = create_result(dates_and_employer_name[0],
+                                   dates_and_employer_name[1],
                                    dates_and_employer_name[2])
             if result is None:
                 bot.send_message(
@@ -157,7 +162,8 @@ def make_decision(call):
                 call.message.chat.id, text=str(e)
             )
             bot.send_message(
-                call.message.chat.id, text="Что-то пошло не так пишите креведкину"
+                call.message.chat.id,
+                text="Что-то пошло не так пишите креведкину"
             )
             new_start_message(call.message.chat.id)
     elif call.data == "cancel":
@@ -188,9 +194,12 @@ def help(message):
 
 @bot.message_handler(commands=["info"])
 def get_info(message):
-    if check_access(message.chat.username) or check_access(message.from_user.username):
+    if check_access(message.chat.username) or check_access(
+            message.from_user.username):
         msg = bot.reply_to(
-            message, "Введите головные вагоны состава например: <b>75001-75002</b> или <b>65001-65002</b>"
+            message,
+            f"Введите любой номер вагона состава например: <b>75002</b> или <b>77001</b>\n"
+            f"Также можно ввести название состава например: <b>765-1</b>,<b>775-1</b>,<b>1М144</b> и т.д"
         )
 
         bot.register_next_step_handler(msg, send_train_data)
@@ -207,7 +216,8 @@ def send_train_data(message):
             bot.send_message(message.chat.id, result)
             new_start_message(message.chat.id)
         except Exception as e:
-            bot.send_message(message.chat.id, text="Возникла ошибка покажите @Krevedko_Krevedkin")
+            bot.send_message(message.chat.id,
+                             text="Возникла ошибка покажите @Krevedko_Krevedkin")
             bot.send_message(message.chat.id, text=e)
             print(e)
 
